@@ -1,5 +1,5 @@
 import QtQuick
-import "../Shared"
+import "../../Shared"
 
 Item {
     property color bookColor: "white"

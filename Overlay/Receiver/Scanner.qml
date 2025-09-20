@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import "../Shared"
+import "../../Shared"
 
 Item {
     property real playerProgress: {
@@ -51,6 +51,7 @@ Item {
         width: 86 * Etc.scale
         height: 11 * Etc.scale
         value: parent.playerProgress
+        focusPolicy: Qt.NoFocus;
         onMoved: {
             const active = Players.active;
             if (active?.canSeek && active?.positionSupported)
@@ -73,6 +74,7 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: Players.active?.previous()
+                    focusPolicy: Qt.NoFocus;
                 }
             }
             Arrow {
@@ -82,6 +84,7 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: Players.active?.next()
+                    focusPolicy: Qt.NoFocus;
                 }
             }
             Rectangle {

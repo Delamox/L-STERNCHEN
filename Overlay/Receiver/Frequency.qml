@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell.Services.Pipewire
-import "../Shared"
+import "../../Shared"
 
 Item {
     property PwNode sink: Pipewire.defaultAudioSink

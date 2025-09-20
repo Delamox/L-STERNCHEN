@@ -1,12 +1,26 @@
 import QtQuick
 import Quickshell.Services.UPower
-import "../Shared"
+import "../../Shared"
 
 Item {
-    property real battery: UPower.displayDevice.percentage
-    function average(a,b,c,p,q,r) {
-        console.log((a*p+b*q+c*r))
-        return ((a*p+b*q+c*r)/255)
+    property real battery: UPower.displayDevice.percentage;
+    property color healthColor;
+    property bool chargeCounter: false;
+    id: root
+
+    Timer {
+        interval: 1000;
+        running: true;
+        repeat: true;
+        onTriggered: {
+            if (chargeCounter) {
+                root.healthColor = (battery >= 0.4) ? "#007aa5" : (battery >= 0.3) ? "#c0a116" : (battery >= 0.2) ? "#c04b00" : (battery >= 0.1) ? "#c02100" : "#3e0000"
+                root.chargeCounter = (UPower.displayDevice.state == "1") ? false : true
+            } else {
+                root.healthColor = (battery >= 0.4) ? "#0099ce" : (battery >= 0.3) ? "#f0c91c" : (battery >= 0.2) ? "#f05e00" : (battery >= 0.1) ? "#f02900" : "#4e0000"
+                root.chargeCounter = true;
+            }
+        }
     }
     Item {
         width: 3 * Etc.scale
@@ -62,40 +76,38 @@ Item {
         height: 36 * Etc.scale
         y: 5 * Etc.scale
         Item {
-            property color healthColor: Qt.rgba( // needs proper gradient
-                255,
-                average(255, 0, 0, battery, 1.0 - battery, 0.0),
-                average(0, 255, 0, battery, 1.0 - battery, 0.0),
-                average(255, 255, 255, battery, 1.0 - battery, 0.0)
-            )
-            anchors.centerIn: parent
+            anchors.centerIn: parent;
             width: 92 * Etc.scale
             height: 32 * Etc.scale
             Rectangle {
                 width: 89 * Etc.scale
                 height: 29 * Etc.scale
                 x: 3 * Etc.scale
-                color: parent.healthColor
+                color: healthColor
+                Behavior on color { ColorAnimation { duration: 1000}}
             }
             Rectangle {
                 width: 89 * Etc.scale
                 height: 29 * Etc.scale
                 x: 2 * Etc.scale
                 y: 1 * Etc.scale
-                color: parent.healthColor
+                color: healthColor
+                Behavior on color { ColorAnimation { duration: 1000}}
             }
             Rectangle {
                 width: 89 * Etc.scale
                 height: 29 * Etc.scale
                 x: 1 * Etc.scale
                 y: 2 * Etc.scale
-                color: parent.healthColor
+                color: healthColor
+                Behavior on color { ColorAnimation { duration: 1000}}
             }
             Rectangle {
                 width: 89 * Etc.scale
                 height: 29 * Etc.scale
                 y: 3 * Etc.scale
-                color: parent.healthColor
+                color: healthColor
+                Behavior on color { ColorAnimation { duration: 1000}}
             }
             Item {
                 width: 9 * Etc.scale
@@ -117,7 +129,7 @@ Item {
             }
             StyledTextSilver {
                 width: parent.width - Etc.scale
-                text: "WARNING"
+                text: (battery >= 0.4) ? "NOMINAL" : (battery >= 0.3) ? "CAUTION" : (battery >= 0.2) ? "WARNING" : (battery >= 0.1) ? "DANGER" : "CRITICAL"
                 pixelHeight: 6
                 horizontalAlignment: Text.AlignRight
             }

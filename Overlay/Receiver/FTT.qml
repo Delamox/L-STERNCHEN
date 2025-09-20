@@ -1,5 +1,5 @@
 import QtQuick
-import "../Shared"
+import "../../Shared"
 
 Item {
     width: 86 * Etc.scale
@@ -136,6 +136,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: Players.active?.seek(-10)
+                focusPolicy: Qt.NoFocus;
             }
             Arrow {
                 rotation: 90
@@ -155,6 +156,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: Players.active?.seek(10)
+                focusPolicy: Qt.NoFocus;
             }
             Arrow {
                 rotation: 270
@@ -174,6 +176,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: Players.active?.playPause()
+                focusPolicy: Qt.NoFocus;
             }
             Rectangle {
                 anchors {
@@ -203,6 +206,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: Players.active?.stop()
+                focusPolicy: Qt.NoFocus;
             }
         }
     }

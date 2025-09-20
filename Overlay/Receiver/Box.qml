@@ -1,5 +1,5 @@
 import QtQuick
-import "../Shared"
+import "../../Shared"
 
 Rectangle {
     property bool activated: false

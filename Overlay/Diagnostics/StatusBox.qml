@@ -1,5 +1,5 @@
 import QtQuick
-import "../Shared"
+import "../../Shared"
 
 Item {
     width: 19 * Etc.scale

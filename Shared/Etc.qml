@@ -1,7 +1,8 @@
 pragma Singleton
 import QtQuick
+import Quickshell
 
-Item {
+Singleton {
     property real scale: 3// size of a pixel, should be floored monitor height / 600
     property int transitionSpeed: 100
     property int visualiserFramerate: 60

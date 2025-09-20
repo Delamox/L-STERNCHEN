@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell.Hyprland
-import "../Shared"
+import "../../Shared"
 // make sure to have some bleach on hand for your eyes because this code is ass, i am not fixing it because i am afraid of it myself
 
 Rectangle {

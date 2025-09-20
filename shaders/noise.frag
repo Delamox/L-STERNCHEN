@@ -34,8 +34,21 @@ void main() {
     vec2 off2 = vec2(3.2307692308) * vec2(1.0,0.0);
     
     // secondary pixelation
-    // vec2 wuv = floor(round(vec2(1) + (fragCoord.xy + (pixelSize / 2))) / (pixelSize * 0.5)) * (pixelSize * 0.5) / iResolution.xy;
-    vec2 wuv = fragCoord.xy / iResolution.xy;
+    // TODO: average out pixelisation instead of flooring it
+    vec2 wuv = round(round(vec2(1) + (fragCoord.xy + (pixelSize / 2))) / (pixelSize * 0.5)) * (pixelSize * 0.5) / iResolution.xy;
+    // vec2 uv = floor(fragCoord / iResolution.xy * pixels) / pixels;
+    // vec2 wuv = floor(fragCoord /iResolution.xy * (iResolution.x / pixelSize)) / (iResolution.x / pixelSize);
+    // fragColor = vec4(0);    
+    // vec2 d = 1.0 / iResolution.xy;
+    // vec2 uv = (d.xy * pixelSize)) * floor(fragCoord.xy / pixelSize));
+    
+	// for (int i = 0; i < PIXEL_SIZE; i++)
+	// 	for (int j = 0; j < PIXEL_SIZE; j++)
+	// 		fragColor += texture(iChannel0, uv.xy + vec2(d.x * float(i), d.y * float(j)));
+
+	// fragColor /= pow(pixelSize), 2.0); 
+
+    // vec2 wuv = fragCoord.xy / iResolution.xy;
 
     //barrel warp
     uv = wuv;
@@ -46,12 +59,11 @@ void main() {
     float disty = cos(theta) * wsz * 1.0;
     uv.x = distx + center.x;
     uv.y = disty + center.y;
-    // fragColor.rb = texture(iChannel0, uv).rb;
-    vec4 blur = texture(iChannel0, uv) * 0.2270270270 / 4;
-    blur += texture(iChannel0, uv + (off1 / iResolution)) * 0.3162162162 * 1.5;
-    blur += texture(iChannel0, uv - (off1 / iResolution)) * 0.3162162162 * 1.5;
-    blur += texture(iChannel0, uv + (off2 / iResolution)) * 0.0702702703 * 1.5;
-    blur += texture(iChannel0, uv - (off2 / iResolution)) * 0.0702702703 * 1.5;
+    vec4 blur = texture(iChannel0, uv) / 2;
+    blur += texture(iChannel0, uv + (off1 / iResolution)) * 0.3162162162;
+    blur += texture(iChannel0, uv - (off1 / iResolution)) * 0.3162162162;
+    blur += texture(iChannel0, uv + (off2 / iResolution)) * 0.0702702703;
+    blur += texture(iChannel0, uv - (off2 / iResolution)) * 0.0702702703;
     fragColor.rba = blur.rba;
 
     //bigger barrel with green channel for abberation effect
@@ -63,23 +75,20 @@ void main() {
     disty = cos(theta) * wsz * 1.0;
     uv.x = distx + center.x;
     uv.y = disty + center.y;
-    // fragColor.g = texture(iChannel0, uv).g;
-    blur = texture(iChannel0, uv) * 0.2270270270 / 4;
-    blur += texture(iChannel0, uv + (off1 / iResolution)) * 0.3162162162 * 1.5;
-    blur += texture(iChannel0, uv - (off1 / iResolution)) * 0.3162162162 * 1.5;
-    blur += texture(iChannel0, uv + (off2 / iResolution)) * 0.0702702703 * 1.5;
-    blur += texture(iChannel0, uv - (off2 / iResolution)) * 0.0702702703 * 1.5;
+    blur = texture(iChannel0, uv) / 2;
+    blur += texture(iChannel0, uv + (off1 / iResolution)) * 0.3162162162;
+    blur += texture(iChannel0, uv - (off1 / iResolution)) * 0.3162162162;
+    blur += texture(iChannel0, uv + (off2 / iResolution)) * 0.0702702703;
+    blur += texture(iChannel0, uv - (off2 / iResolution)) * 0.0702702703;
     fragColor.g = blur.g;
 
-    // bars
+    //bars
     float over = floor(mod(uv.y * iResolution.y, 7.0 * (pixelSize/barSize)) / (pixelSize/barSize));
     if(over == 0.0 || over == 1.0) {
         fragColor.rgb *= 1.0 - ubuf.barStrength / 2;
     } else if (over == 2.0 || over == 4.0 || over == 6.0) {
         fragColor.rgb *= 1.0 - ubuf.barStrength;
     }
-
-    
     //return
     fragColor.rgb = fragColor.rgb * ubuf.brightness;
 }
