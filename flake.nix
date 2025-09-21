@@ -65,7 +65,7 @@
         };
       };
       L-STERNCHEN = let
-        dependencies = [ pkgs.cava quickshell.packages.${system}.default ];
+        dependencies = [ pkgs.cava app2unit quickshell.packages.${system}.default ];
       in pkgs.writeShellScriptBin "L-STERNCHEN" ''
         if ! [ $QS_CONFIG_PATH ]; then
           export QS_CONFIG_PATH=${L-STERNCHEN-config}
