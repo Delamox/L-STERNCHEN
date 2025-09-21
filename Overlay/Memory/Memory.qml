@@ -5,7 +5,6 @@ import "../../Shared"
 
 Rectangle {
     property var offset: [0,1,2,3,4,5,6,7,8,9,10,11,12]
-    property var contain: ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"]
     property int highest: 6
     property var current
     property var rootId
@@ -46,12 +45,22 @@ Rectangle {
         }
     }
     function reset(q) {
-        contain = Apps.fuzzyQuery(q);
+        Elephant.searchDesktop(q);
+    }
+    property var contain: Elephant.search.response
+
+    // property string test: Elephant.test
+    // onTestChanged: {
+    //     console.log(test);
+    // }
+
+    onContainChanged: {
         highest = 6
         rep.children.forEach((element) => {
             element.clean()
         })
     }
+    
     Component.onCompleted: {
         reset("");
     }
@@ -183,7 +192,7 @@ Rectangle {
                     reset(text.text)
                 }
                 onAccepted: {
-                    Apps.launch(current)
+                    Elephant.launchDesktop(current);
                     rootId.toggleVis()
                 }
                 Keys.onUpPressed: up()

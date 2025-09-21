@@ -9,18 +9,28 @@ Singleton {
     id: root
     property var search
     property string query
+    property var desktopEntry
+    // property string test
 
     Process {
-        id: proc
-        // command: ["bash", "/home/del/git/Signalis/Shared/Elephant.sh", "spotify"]
+        id: searchProc
         command: ["bash", qsTr("%1/Shared/Elephant.sh").arg(Quickshell.shellDir), root.query]
         stdout: StdioCollector {
-            onStreamFinished: root.search = JSON.parse(this.text);
+            // onStreamFinished: {root.test = this.text}
+            onStreamFinished: {root.search = JSON.parse(this.text)}
         }
     }
+    Process {
+        id: launchProc
+        command: ["elephant", "activate", qsTr("%1;desktopapplications;%2;open;").arg(root.desktopEntry.id).arg(root.desktopEntry.ident)]
+    }
 
+    function launchDesktop(query: var) {
+        root.desktopEntry = query;
+        launchProc.running = true;
+    }
     function searchDesktop(query: string): var {
         root.query = query;
-        proc.running = true;
+        searchProc.running = true;
     }
 }

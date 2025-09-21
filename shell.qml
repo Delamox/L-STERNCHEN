@@ -27,19 +27,4 @@ PanelWindow {
         id: engschrift
         source: "./fonts/DINEngschrift Regular.ttf"
     }
-
-    property var search: Elephant.search
-
-    onSearchChanged: {
-        console.log(root.search.response[0].id)
-    }
-
-    GlobalShortcut {
-        name: "test"
-        appid: "quickshell"
-        onPressed: {
-            Elephant.searchDesktop("spotify")
-            console.log(root.search)
-        }
-    }
 }
