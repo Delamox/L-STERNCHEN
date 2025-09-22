@@ -39,7 +39,7 @@
         '';
       });
       L-STERNCHEN = let
-        dependencies = [ pkgs.cava pkgs.uwsm quickshell.packages.${system}.default elephant.packages.${system}.elephant];
+        dependencies = [ pkgs.cava pkgs.uwsm quickshell.packages.${system}.default elephant.packages.${system}.elephant-with-providers];
       in pkgs.writeShellScriptBin "L-STERNCHEN" ''
         if ! [ $QS_CONFIG_PATH ]; then
           export QS_CONFIG_PATH=${L-STERNCHEN-config}
