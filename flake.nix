@@ -8,9 +8,13 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    elephant = {
+      url = "github:abenz1267/elephant";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, quickshell }: let
+  outputs = { self, nixpkgs, quickshell, elephant }: let
     lib = nixpkgs.lib;
     perSystem = package: (lib.listToAttrs (lib.map (a: { name = a; value = package { pkgs = nixpkgs.legacyPackages.${a}; system = a; }; }) (lib.attrNames nixpkgs.legacyPackages)));
     makeQmlPath = pkgs: lib.makeSearchPath "lib/qt-6/qml" (map (path: "${path}") pkgs);
@@ -34,38 +38,8 @@
           cp -r * $out
         '';
       });
-      app2unit = pkgs.stdenv.mkDerivation {
-        pname = "app2unit";
-        version = "0-unstable-2025-04-03";
-
-        src = pkgs.fetchFromGitHub {
-          owner = "Vladimir-csp";
-          repo = "app2unit";
-          rev = "44b5da8a6f1e5449d3c2a8b63dc54875bb7e10af";
-          hash = "sha256-SJVGMES0tmdAhh2u8IpGAITtSnDrgSfOQbDX9RhOc/M=";
-        };
-
-        buildInputs = with pkgs; [
-          coreutils
-          xdg-terminal-exec
-          libnotify
-        ];
-
-        installPhase = ''
-          mkdir -p $out/bin
-          cp app2unit $out/bin
-        '';
-
-        meta = {
-          description = "A simple app launcher for X11 and Wayland";
-          homepage = "https://github.com/Vladimir-csp/app2unit";
-          mainProgram = "app2unit";
-          license = lib.licenses.gpl3Plus;
-          platforms = lib.platforms.linux;
-        };
-      };
       L-STERNCHEN = let
-        dependencies = [ pkgs.cava app2unit quickshell.packages.${system}.default ];
+        dependencies = [ pkgs.cava pkgs.uwsm quickshell.packages.${system}.default elephant.packages.${system}.elephant];
       in pkgs.writeShellScriptBin "L-STERNCHEN" ''
         if ! [ $QS_CONFIG_PATH ]; then
           export QS_CONFIG_PATH=${L-STERNCHEN-config}
@@ -80,6 +54,7 @@
       default = pkgs.mkShell {
         packages = [
           pkgs.cava
+          pkgs.uwsm
           self.packages.${system}.default
         ];
 

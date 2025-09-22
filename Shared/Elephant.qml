@@ -24,6 +24,10 @@ Singleton {
         id: launchProc
         command: ["elephant", "activate", qsTr("%1;desktopapplications;%2;open;").arg(root.desktopEntry.id).arg(root.desktopEntry.ident)]
     }
+    Process {
+        running: true
+        command: ["elephant"]
+    }
 
     function launchDesktop(query: var) {
         root.desktopEntry = query;
