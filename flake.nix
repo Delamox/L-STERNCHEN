@@ -50,20 +50,9 @@
       '';
       default = L-STERNCHEN;
     });
-    devShells = perSystem ({ pkgs, system }: {
-      default = pkgs.mkShell {
-        packages = [
-          pkgs.cava
-          pkgs.uwsm
-          self.packages.${system}.default
-        ];
-
-        QML2_IMPORT_PATH = qmlPath pkgs;
-
-        shellHook = ''
-          export QS_CONFIG_PATH="$(pwd)/src"
-        '';
-      };
-    });
+    nixosModules = {
+      default = self.nixosModules.L-STERNCHEN;
+      L-STERNCHEN = import ./nix/modules/default.nix self;
+    };
   };
 }
