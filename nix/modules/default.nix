@@ -9,14 +9,14 @@ flake:
 with lib;
 let
   cfg = config.programs.L-STERNCHEN;
-  elephantPackage = inputs.elephant.packages.${system}.elephant-with-providers;
+  elephantPackage = inputs.elephant.packages.${pkgs.stdenv.system}.elephant-with-providers;
 in
 {
   options.programs.L-STERNCHEN = {
     enable = mkEnableOption "Signalis themed desktop shell";
   };
   config = mkIf cfg.enable {
-    environment.systemPackages = [flake.packages.${system}.L-STERNCHEN];
+    environment.systemPackages = [flake.packages.${pkgs.stdenv.system}.L-STERNCHEN];
     environment.etc."xdg/elephant/providers" = {
       source = "${elephantPackage}/lib/elephant/providers";
     };
