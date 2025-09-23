@@ -1,6 +1,8 @@
 # L-STERNCHEN
 A desktop shell designed to integrate the Signalis user interface into your Linux machine.
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fbc452e6-81ed-498e-97e4-b6b6a52d47ee" />
+
 
 ## Features
 Overlay:
