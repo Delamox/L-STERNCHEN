@@ -57,6 +57,7 @@ PanelWindow {
             property real shiftStrength: 0.15
             property real warp: 0.07
             property real brightness: 1.5
+            property vector2d mouseCoord: Qt.vector2d(cursor.mouseX, height - cursor.mouseY)
             property ShaderEffectSource iChannel0: ShaderEffectSource {
                 sourceItem: shaderlayer
                 textureMirroring: ShaderEffectSource.NoMirroring
@@ -101,6 +102,14 @@ PanelWindow {
             x: 409 * Etc.scale
             y: 38 * Etc.scale
         }
+    }
+    MouseArea {
+        id: cursor
+        anchors.fill: parent
+        hoverEnabled: true
+        propagateComposedEvents: true
+        preventStealing: true
+        cursorShape: Qt.BlankCursor
     }
     Image {
         id: tvBorder

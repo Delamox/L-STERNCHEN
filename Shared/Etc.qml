@@ -3,7 +3,7 @@ import QtQuick
 import Quickshell
 
 Singleton {
-    property real scale: 3// size of a pixel, should be floored monitor height / 600
+    property real scale: 3 // size of a pixel, monitor height in pixels divided by 360, assuming 16:9
     property int transitionSpeed: 100
     property int visualiserFramerate: 60
     property int visualiserSmoothing: 15

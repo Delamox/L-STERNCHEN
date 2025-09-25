@@ -6,11 +6,23 @@ Item {
     property PwNode sink: Pipewire.defaultAudioSink
     property var volume: sink.audio.volume
     PwObjectTracker {
-        objects: [ sink ]
+        objects: [ borders.sink ]
     }
     id: borders
     width: 94 * Etc.scale
     height: 38 * Etc.scale
+    // MouseArea {
+    //     anchors.fill: parent
+    //     onWheel: event => {
+    //         console.log(event.angleDelta)
+    //         if (event.angleDelta.y < 0) {
+    //             borders.sink.audio.volume += 0.0025;
+    //         } else if (event.angleDelta.y > 0) {
+    //             borders.sink.audio.volume += -0.0025;
+
+    //         }
+    //     }
+    // }
     StyledTextVisitor {
         x: 96 * Etc.scale
         y: 32 * Etc.scale - 0.8 * Etc.scale

@@ -7,6 +7,7 @@ Rectangle {
     property var offset: [0,1,2,3,4,5,6,7,8,9,10,11,12]
     property int highest: 6
     property var current
+    property var contain: Elephant.search.response
     property var rootId
     id: root
     width: 210 * Etc.scale
@@ -15,6 +16,9 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: text.focus = true;
+    }
+    function mod(a,n) { // this fucking language can burn in hell together with its creators the fucking % operator isn't even a real modulo operator it just fakes it, spent 2 hours fixing a bug that wasn't even mine seriously fuck this shit bruh bitchass fake language
+        return ((a%n)+n)%n;
     }
     function up() {
         if (contain.length > 1) {
@@ -47,26 +51,18 @@ Rectangle {
     function reset(q) {
         Elephant.searchDesktop(q);
     }
-    property var contain: Elephant.search.response
-
-    // property string test: Elephant.test
-    // onTestChanged: {
-    //     console.log(test);
-    // }
-
-    onContainChanged: {
+    function load() {
         highest = 6
         rep.children.forEach((element) => {
             element.clean()
         })
     }
-    
-    Component.onCompleted: {
-        reset("");
-    }
-    function mod(a,n) { // this fucking language can burn in hell together with its creators the fucking % operator isn't even a real modulo operator it just fakes it, spent 2 hours fixing a bug that wasn't even mine seriously fuck this shit bruh bitchass fake language
-        return ((a%n)+n)%n;
-    }
+    // property string test: Elephant.test
+    // onTestChanged: {
+    //     console.log(test);
+    // }
+    onContainChanged: load()
+    Component.onCompleted: reset("")
     Rectangle {
         id: container
         width: 208 * Etc.scale
@@ -173,6 +169,7 @@ Rectangle {
             x: 59 * Etc.scale
             y: 240 * Etc.scale
             color: Etc.active
+            clip: true
             GlobalShortcut {
                 name: "launcher"
                 appid: "quickshell"
@@ -201,6 +198,8 @@ Rectangle {
                 font.pointSize: 13 * Etc.scale / 7 * 5
                 horizontalAlignment: TextInput.AlignHCenter
                 verticalAlignment: TextInput.AlignVCenter
+                selectionColor: Etc.accent
+                selectedTextColor: "black";
             }
         }
         Rectangle {

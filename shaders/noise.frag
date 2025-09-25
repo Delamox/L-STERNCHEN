@@ -8,6 +8,7 @@ layout(std140, binding = 0) uniform buf {
     float qt_Opacity;
     float time;
     vec2 resolution;
+    vec2 mouseCoord;
     int pixelSize;
     float barSize;
     float barStrength;
@@ -19,6 +20,7 @@ layout(std140, binding = 0) uniform buf {
 layout(binding = 1) uniform sampler2D iChannel0;
 
 #define iTime ubuf.time
+#define iMouse ubuf.mouseCoord
 #define iResolution ubuf.resolution
 #define pixelSize ubuf.pixelSize
 #define barSize ubuf.barSize
@@ -48,6 +50,7 @@ void main() {
     float disty = cos(theta) * wsz * 1.0;
     uv.x = distx + center.x;
     uv.y = disty + center.y;
+    vec2 global = uv;
     vec4 blur = texture(iChannel0, uv) / 2;
     blur += texture(iChannel0, uv + (off1 / iResolution)) * 0.3162162162;
     blur += texture(iChannel0, uv - (off1 / iResolution)) * 0.3162162162;
@@ -71,6 +74,7 @@ void main() {
     blur += texture(iChannel0, uv - (off2 / iResolution)) * 0.0702702703;
     fragColor.g = blur.g;
 
+    uv = wuv;
     //bars
     float over = floor(mod(uv.y * iResolution.y, 7.0 * (pixelSize/barSize)) / (pixelSize/barSize));
     if(over == 0.0 || over == 1.0) {
@@ -78,6 +82,12 @@ void main() {
     } else if (over == 2.0 || over == 4.0 || over == 6.0) {
         fragColor.rgb *= 1.0 - barStrength;
     }
+
+    //cursor
+    if(abs(iMouse.y-global.y*iResolution.y) < 4.0 && abs(iMouse.x-global.x*iResolution.x) < 4.0 ) {
+        fragColor.rgba = vec4(1.0,1.0,1.0,1.0);
+    }
+    
     //return
     fragColor.rgb = fragColor.rgb * brightness;
 }

@@ -20,5 +20,9 @@ in
     environment.etc."xdg/elephant/providers" = {
       source = "${elephantPackage}/lib/elephant/providers";
     };
+    services = {
+      upower.enable = true;
+      playerctld.enable = true;
+    };
   };
 }
