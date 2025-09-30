@@ -49,6 +49,7 @@ PanelWindow {
             id: shader
             fragmentShader: "../shaders/noise.frag.qsb"
             vertexShader: "../shaders/default.vert.qsb"
+            blending: false
             property vector2d resolution: Qt.vector2d(width, height)
             property real time: 0
             property int pixelSize: Etc.scale
@@ -61,13 +62,8 @@ PanelWindow {
             property ShaderEffectSource iChannel0: ShaderEffectSource {
                 sourceItem: shaderlayer
                 textureMirroring: ShaderEffectSource.NoMirroring
+                hideSource: true
             }
-            // FrameAnimation {
-            //     running: true;
-            //     onTriggered: {
-            //         shader.time = this.elapsedTime;
-            //     }
-            // }
         }
         StyledTextVisitor {
             text: "GENERATiON  \nLAndvermessungs-/\nschiff-techniker\nReplika"
@@ -108,7 +104,8 @@ PanelWindow {
         anchors.fill: parent
         hoverEnabled: true
         propagateComposedEvents: true
-        preventStealing: true
+        acceptedButtons: Qt.NoButton
+        // preventStealing: true
         cursorShape: Qt.BlankCursor
     }
     Image {

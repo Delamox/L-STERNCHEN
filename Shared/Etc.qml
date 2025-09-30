@@ -6,7 +6,7 @@ Singleton {
     property real scale: 3 // size of a pixel, monitor height in pixels divided by 360, assuming 16:9
     property int transitionSpeed: 100
     property int visualiserFramerate: 60
-    property int visualiserSmoothing: 15
+    property int visualiserSmoothing: 13
     // property int visualiserLowCut: 50
     // property int visualiserHighCut: 10000
     property color active: "#FFFFFF"

@@ -14,7 +14,10 @@ PanelWindow {
         left: true
     }
     implicitHeight: 50;
-    Overlay {}
+    Loader {
+        active: true
+        sourceComponent: Overlay {}
+    }
     FontLoader {
         id: visitor2
         source: "./fonts/visitor2e.ttf"

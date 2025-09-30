@@ -40,6 +40,7 @@ void main() {
     // secondary pixelation
     // TODO: average out pixelisation instead of flooring it
     vec2 wuv = round(round(vec2(1) + (fragCoord.xy + (pixelSize / 2))) / (pixelSize * 0.5)) * (pixelSize * 0.5) / iResolution.xy;
+    // vec2 wuv = fragCoord.xy / iResolution.xy;
 
     //barrel warp
     vec2 uv = wuv;
@@ -75,6 +76,17 @@ void main() {
     fragColor.g = blur.g;
 
     uv = wuv;
+
+    //cursor
+    float ySeq = abs(iMouse.y-global.y*iResolution.y);
+    float xSeq = abs(iMouse.x-global.x*iResolution.x);
+    if (xSeq <= pixelSize * 1.0 && ySeq >= pixelSize * 1.0 && ySeq <= pixelSize * 3.0) {
+        fragColor.rgba = vec4(1.0,1.0,1.0,1.0);
+    }
+    if (ySeq <= pixelSize * 1.0 && xSeq >= pixelSize * 1.0 && xSeq <= pixelSize * 3.0) {
+        fragColor.rgba = vec4(1.0,1.0,1.0,1.0);
+    }
+
     //bars
     float over = floor(mod(uv.y * iResolution.y, 7.0 * (pixelSize/barSize)) / (pixelSize/barSize));
     if(over == 0.0 || over == 1.0) {
@@ -83,11 +95,6 @@ void main() {
         fragColor.rgb *= 1.0 - barStrength;
     }
 
-    //cursor
-    if(abs(iMouse.y-global.y*iResolution.y) < 4.0 && abs(iMouse.x-global.x*iResolution.x) < 4.0 ) {
-        fragColor.rgba = vec4(1.0,1.0,1.0,1.0);
-    }
-    
     //return
     fragColor.rgb = fragColor.rgb * brightness;
 }
