@@ -3,14 +3,13 @@
   #largely copied from readf0x because I am too lazy to do it myself.
 
   inputs = {
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     elephant = {
       url = "github:abenz1267/elephant";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
