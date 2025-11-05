@@ -37,11 +37,7 @@ Example flake.nix:
 ```nix
 {
   inputs = {
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    L-STERNCHEN = {
-      url = "github:Delamox/L-STERNCHEN";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    L-STERNCHEN.url = "github:Delamox/L-STERNCHEN";
   };
 
   outputs = inputs @ { nixpkgs, L-STERNCHEN }: {
