@@ -2,17 +2,15 @@
   "nodes": {
     "elephant": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs",
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1758518363,
-        "narHash": "sha256-2X7YdPUO3/FD9uxd/pYMEU5neap3M764oCpWJ8tllsA=",
+        "lastModified": 1762340075,
+        "narHash": "sha256-fEWzTPj5lRGaWrCMRbAptAYMTaUcxftnaNkf11A/Tr4=",
         "owner": "abenz1267",
         "repo": "elephant",
-        "rev": "a6f941784aea29d066da9b4b6d7f3a6516b0ddc7",
+        "rev": "bc5200a9fada16cdb226e616aa83068f50cf5ba1",
         "type": "github"
       },
       "original": {
@@ -23,11 +21,27 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1758277210,
-        "narHash": "sha256-iCGWf/LTy+aY0zFu8q12lK8KuZp7yvdhStehhyX1v8w=",
+        "lastModified": 1760284886,
+        "narHash": "sha256-TK9Kr0BYBQ/1P5kAsnNQhmWWKgmZXwUQr4ZMjCzWf2c=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "cf3f5c4def3c7b5f1fc012b3d839575dbe552d43",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1762111121,
+        "narHash": "sha256-4vhDuZ7OZaZmKKrnDpxLZZpGIJvAeMtK6FKLJYUtAdw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8eaee110344796db060382e15d3af0a9fc396e0e",
+        "rev": "b3d51a0365f6695e7dd5cdf3e180604530ed33b4",
         "type": "github"
       },
       "original": {
@@ -44,11 +58,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1758273351,
-        "narHash": "sha256-wOv1guIi9THD1NjOtBU2Xh/Avg9xv7nIjsfFSkr1NeQ=",
+        "lastModified": 1761897390,
+        "narHash": "sha256-er4gYrIoThYLjlsOMTysoRfn67d1Gci+ZpqDrtQxrA0=",
         "ref": "refs/heads/master",
-        "rev": "e9a574d919a89602d2868621576b2ccae54a5cb0",
-        "revCount": 675,
+        "rev": "fc704e6b5d445899a1565955268c91942a4f263f",
+        "revCount": 700,
         "type": "git",
         "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
       },
@@ -60,7 +74,7 @@
     "root": {
       "inputs": {
         "elephant": "elephant",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "quickshell": "quickshell"
       }
     },
