@@ -21,7 +21,7 @@ Singleton {
     }
     Process {
         id: launchDesktopProc
-        command: ["elephant", "activate", qsTr("%1;desktopapplications;%2;open;").arg(root.desktopEntry.id).arg(root.desktopEntry.ident)]
+        command: ["elephant", "activate", qsTr("desktopapplications;%1;start;;").arg(root.desktopEntry.ident)]
     }
     Process {
         running: true
