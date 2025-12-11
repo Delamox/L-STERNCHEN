@@ -17,13 +17,7 @@ PanelWindow {
         appid: "quickshell"
         onPressed: toggleVis()
     }
-    function toggleVis() {
-        if (root.visible) {
-            transOut.running = true;
-        } else {
-            transIn.running = true;
-        }
-    }
+    function toggleVis() {root.visible ? transOut.running = true : transIn.running = true;}
     anchors {
         top: true
         right: true
@@ -65,38 +59,42 @@ PanelWindow {
                 hideSource: true
             }
         }
-        StyledTextVisitor {
-            text: "GENERATiON  \nLAndvermessungs-/\nschiff-techniker\nReplika"
-            horizontalAlignment: Text.AlignRight
-            lineHeight: 6 * Etc.scale
-            lineHeightMode: Text.FixedHeight
-            color: Etc.foreground
-            x: 39 * Etc.scale
-            y: 304 * Etc.scale
+        Item {
+            // color: red
+            x: parent.width / 2 - width / 2
+            y: parent.height / 2 - height / 2 - 9 * Etc.scale
+            width: 562 * Etc.scale
+            height: 266 * Etc.scale
             StyledTextVisitor {
-                text: "5"
-                x: 92 * Etc.scale
-                color: Etc.accent
-            }
-            StyledTextVisitor {
-                text: "V.5.6.1"
-                x: 536 * Etc.scale
-                y: 18 * Etc.scale
+                text: "GENERATiON  \nLAndvermessungs-/\nschiff-techniker\nReplika"
+                horizontalAlignment: Text.AlignRight
+                lineHeight: 6 * Etc.scale
+                lineHeightMode: Text.FixedHeight
                 color: Etc.foreground
+                y: 266 * Etc.scale
+                StyledTextVisitor {
+                    text: "5"
+                    x: 92 * Etc.scale
+                    color: Etc.accent
+                }
+                StyledTextVisitor {
+                    text: "V.5.6.1"
+                    x: 536 * Etc.scale
+                    y: 18 * Etc.scale
+                    color: Etc.foreground
+                }
             }
-        }
-        Receiver {
-            x: 39 * Etc.scale
-            y: 38 * Etc.scale
-        }
-        Memory {
-            rootId: root
-            x: 194 * Etc.scale
-            y: 38 * Etc.scale
-        }
-        Diagnostics {
-            x: 409 * Etc.scale
-            y: 38 * Etc.scale
+            Receiver {
+                // y: 38 * Etc.scale
+                // x: 39 * Etc.scale
+            }
+            Memory {
+                rootId: root
+                x: 155 * Etc.scale
+            }
+            Diagnostics {
+                x: 370 * Etc.scale
+            }
         }
     }
     MouseArea {

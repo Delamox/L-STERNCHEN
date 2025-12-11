@@ -39,7 +39,8 @@ void main() {
     
     // secondary pixelation
     // TODO: average out pixelisation instead of flooring it
-    vec2 wuv = round(round(vec2(1) + (fragCoord.xy + (pixelSize / 2))) / (pixelSize * 0.5)) * (pixelSize * 0.5) / iResolution.xy;
+    // vec2 wuv = round(round(vec2(1) + (fragCoord.xy + (pixelSize / 2))) / (pixelSize * 0.5)) * (pixelSize * 0.5) / iResolution.xy;
+    vec2 wuv = (round(vec2(pixelSize / 2) + (fragCoord.xy / (pixelSize * 0.85))) * (pixelSize * 0.85)) / iResolution.xy;
     // vec2 wuv = fragCoord.xy / iResolution.xy;
 
     //barrel warp
