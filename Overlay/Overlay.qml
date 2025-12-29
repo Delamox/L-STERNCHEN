@@ -15,7 +15,7 @@ PanelWindow {
     GlobalShortcut {
         name: "visibility"
         appid: "quickshell"
-        onPressed: toggleVis()
+        onPressed: root.toggleVis()
     }
     function toggleVis() {root.visible ? transOut.running = true : transIn.running = true;}
     anchors {
@@ -60,7 +60,6 @@ PanelWindow {
             }
         }
         Item {
-            // color: red
             x: parent.width / 2 - width / 2
             y: parent.height / 2 - height / 2 - 9 * Etc.scale
             width: 562 * Etc.scale
@@ -84,10 +83,7 @@ PanelWindow {
                     color: Etc.foreground
                 }
             }
-            Receiver {
-                // y: 38 * Etc.scale
-                // x: 39 * Etc.scale
-            }
+            Receiver {}
             Memory {
                 rootId: root
                 x: 155 * Etc.scale
@@ -103,7 +99,6 @@ PanelWindow {
         hoverEnabled: true
         propagateComposedEvents: true
         acceptedButtons: Qt.NoButton
-        // preventStealing: true
         cursorShape: Qt.BlankCursor
     }
     Image {

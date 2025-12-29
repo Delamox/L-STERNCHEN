@@ -4,21 +4,17 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     elephant = {
-      url = "github:abenz1267/elephant";
+      url = "github:abenz1267/elephant?ref=2.0.0";
     };
   };
 
-  outputs = { self, nixpkgs, quickshell, elephant }: let
+  outputs = { self, nixpkgs, ... }: let
     lib = nixpkgs.lib;
     perSystem = package: (lib.listToAttrs (lib.map (a: { name = a; value = package { pkgs = nixpkgs.legacyPackages.${a}; system = a; }; }) (lib.attrNames nixpkgs.legacyPackages)));
     makeQmlPath = pkgs: lib.makeSearchPath "lib/qt-6/qml" (map (path: "${path}") pkgs);
     qmlPath = pkgs: makeQmlPath [
-      quickshell.packages.${pkgs.system}.default
+      pkgs.quickshell
       pkgs.kdePackages.qtshadertools
       pkgs.kdePackages.qtdeclarative
     ];
@@ -38,14 +34,17 @@
         '';
       });
       L-STERNCHEN = let
-        dependencies = [ pkgs.cava pkgs.uwsm quickshell.packages.${system}.default ];
+        dependencies = with pkgs; [
+          cava
+          quickshell
+        ];
       in pkgs.writeShellScriptBin "L-STERNCHEN" ''
         if ! [ $QS_CONFIG_PATH ]; then
           export QS_CONFIG_PATH=${L-STERNCHEN-config}
         fi
         export PATH="${lib.makeBinPath dependencies}:$PATH"
         export QML2_IMPORT_PATH="${qmlPath pkgs}"
-        ${quickshell.packages.${system}.default}/bin/quickshell $@
+        ${pkgs.quickshell}/bin/quickshell $@
       '';
       default = L-STERNCHEN;
     });

@@ -3,17 +3,15 @@ import Quickshell
 import Quickshell.Hyprland
 import "./Overlay"
 import "./Shared"
+import "./Bar"
 
 PanelWindow {
     id: root
     visible: false;
-    color: "red"
-    anchors {
-        top: true
-        right: true
-        left: true
+    Loader {
+        active: false
+        sourceComponent: Bar {}
     }
-    implicitHeight: 50;
     Loader {
         active: true
         sourceComponent: Overlay {}

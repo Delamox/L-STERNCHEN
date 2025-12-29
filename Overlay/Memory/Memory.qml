@@ -194,6 +194,7 @@ Rectangle {
                 }
                 Keys.onUpPressed: up()
                 Keys.onDownPressed: down()
+                Keys.onEscapePressed: rootId.focus()
                 font.family: visitor2.font.family
                 font.pointSize: 13 * Etc.scale / 7 * 5
                 horizontalAlignment: TextInput.AlignHCenter

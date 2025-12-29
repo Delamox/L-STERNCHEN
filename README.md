@@ -27,8 +27,6 @@ Opening the overlay with your launcher keybind will automatically focus the laun
 
 ## Installation
 Currently only supports Nix through flakes, an example flake configuration is provided below.
-> [!WARNING]
-> Make sure the nixpkgs input is set to the unstable channel.
 
 > [!WARNING]
 > Only works on Hyprland.
@@ -37,7 +35,11 @@ Example flake.nix:
 ```nix
 {
   inputs = {
-    L-STERNCHEN.url = "github:Delamox/L-STERNCHEN";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    L-STERNCHEN = {
+      url = "github:Delamox/L-STERNCHEN";
+      inputs.nixpkgs.follows = "nixpkgs";
+    }
   };
 
   outputs = inputs @ { nixpkgs, L-STERNCHEN }: {

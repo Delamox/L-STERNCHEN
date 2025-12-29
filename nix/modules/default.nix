@@ -3,7 +3,6 @@ flake:
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 with lib;
@@ -18,7 +17,6 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [
       flake.packages.${system}.L-STERNCHEN
-      # inputs.elephant.packages.${system}.elephant-with-providers
     ];
     
     services = {
