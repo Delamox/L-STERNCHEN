@@ -9,7 +9,7 @@ Singleton {
     id: root
     readonly property list<MprisPlayer> list: Mpris.players.values
     readonly property MprisPlayer active: manualActive ?? list.find(p => p.identity === "Spotify") ?? list[0] ?? null
-    // readonly property MprisPlayer active: list[0] ?? null
+    readonly property string activeIdentity: active.identity || "TRANSKRiption"
     property MprisPlayer manualActive
     function getActive(prop: string): string {
         const active = root.active;
