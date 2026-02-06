@@ -149,6 +149,14 @@ Rectangle {
                     }
                 }
             }
+            Image {
+                id: img
+                x: parent.width / 2 - paintedWidth / 2
+                width: 36 * Etc.scale
+                height: 36 * Etc.scale
+                y: 23 * Etc.scale
+                source: Players.active?.trackArtUrl || ""
+            }
         }
     }
 }

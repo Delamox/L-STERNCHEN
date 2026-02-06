@@ -5,7 +5,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     elephant = {
-      url = "github:abenz1267/elephant?ref=2.0.0";
+      url = "github:abenz1267/elephant?rev=bc5200a9fada16cdb226e616aa83068f50cf5ba1";
     };
   };
 
