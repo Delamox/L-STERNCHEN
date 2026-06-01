@@ -7,7 +7,7 @@ Rectangle {
     color: Etc.accent
     StyledTextVisitor {
         anchors.horizontalCenter: parent.horizontalCenter
-        text: Players.activeIdentity
+        text: Players.active?.identity || "TRANSKRiption"
         color: Etc.background
     }
     Rectangle {
@@ -152,10 +152,11 @@ Rectangle {
             Image {
                 id: img
                 x: parent.width / 2 - paintedWidth / 2
-                width: 36 * Etc.scale
+                // width: 36 * Etc.scale
+                fillMode: Image.PreserveAspectFit
                 height: 36 * Etc.scale
                 y: 23 * Etc.scale
-                source: Players.active?.trackArtUrl || ""
+                source: Players.getArtUrl(Players.active)
             }
         }
     }

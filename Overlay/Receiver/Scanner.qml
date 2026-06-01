@@ -3,9 +3,21 @@ import QtQuick.Controls
 import "../../Shared"
 
 Item {
+    id: root
     property real playerProgress: {
         const active = Players.active;
-        return active?.length ? active.position / active.length : 0;
+        return active?.length ? (active.position % active.length) / active.length : 0;
+    }
+    Timer {
+        running: Players.active?.isPlaying ?? false
+        interval: 500
+        triggeredOnStart: true
+        repeat: true
+        onTriggered: {
+            if (!Players.active)
+                return;
+            Players.active?.positionChanged();
+        }
     }
     width: 1
     height: 1
@@ -47,15 +59,25 @@ Item {
         onTriggered: Players.active?.positionChanged()
     }
     Slider {
+        property real test: 0.0
         id: slider
+        live: false
         width: 86 * Etc.scale
         height: 11 * Etc.scale
-        value: parent.playerProgress
         focusPolicy: Qt.NoFocus;
-        onMoved: {
-            const active = Players.active;
-            if (active?.canSeek && active?.positionSupported)
-                active.position = value * active.length;
+        onPressedChanged: {
+            if (pressed == false) {
+                const active = Players.active;
+                if (active?.canSeek && active?.positionSupported)
+                    active.position = value * active.length;
+                    Players.active?.positionChanged();
+            }
+        }
+        Binding {
+            target: slider
+            property: "value"
+            value: root.playerProgress
+            when: !slider.pressed
         }
         handle: Rectangle {
             width: Etc.scale

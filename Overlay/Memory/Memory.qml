@@ -57,10 +57,6 @@ Rectangle {
             element.clean()
         })
     }
-    // property string test: Elephant.test
-    // onTestChanged: {
-    //     console.log(test);
-    // }
     onContainChanged: load()
     Component.onCompleted: reset("")
     Rectangle {
@@ -192,9 +188,15 @@ Rectangle {
                     Elephant.launchDesktop(current);
                     rootId.toggleVis()
                 }
-                Keys.onUpPressed: up()
-                Keys.onDownPressed: down()
-                Keys.onEscapePressed: rootId.focus()
+                Keys.onPressed: {
+                    if (!event.isAutoRepeat) {
+                        if (event.key === Qt.Key_Up) {
+                            up()
+                        } else if (event.key === Qt.Key_Down) {
+                            down()
+                        }
+                    }
+                }
                 font.family: visitor2.font.family
                 font.pointSize: 13 * Etc.scale / 7 * 5
                 horizontalAlignment: TextInput.AlignHCenter

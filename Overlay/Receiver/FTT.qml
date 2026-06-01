@@ -175,7 +175,7 @@ Item {
             y: 79 * Etc.scale
             MouseArea {
                 anchors.fill: parent
-                onClicked: Players.active?.playPause()
+                onClicked: Players.active?.togglePlaying()
                 focusPolicy: Qt.NoFocus;
             }
             Rectangle {

@@ -101,11 +101,29 @@ PanelWindow {
         acceptedButtons: Qt.NoButton
         cursorShape: Qt.BlankCursor
     }
+    Rectangle {
+        color: "black"
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: parent.left
+            right: tvBorder.left
+        }
+    }
+    Rectangle {
+        color: "black"
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: tvBorder.right
+            right: parent.right
+        }
+    }
     Image {
         id: tvBorder
         visible: false
         anchors.centerIn: parent
-        width: parent.width * 1.025
+        width: Etc.scale * 640 * 1.025
         height: parent.height * 1.025
         source: "./inventory_screenBorder.png"
         fillMode: Image.PreserveAspectCrop
