@@ -136,7 +136,6 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: Players.active?.seek(-10)
-                focusPolicy: Qt.NoFocus;
             }
             Arrow {
                 rotation: 90
@@ -156,7 +155,6 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: Players.active?.seek(10)
-                focusPolicy: Qt.NoFocus;
             }
             Arrow {
                 rotation: 270
@@ -176,7 +174,6 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: Players.active?.togglePlaying()
-                focusPolicy: Qt.NoFocus;
             }
             Rectangle {
                 anchors {
@@ -206,7 +203,6 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: Players.active?.stop()
-                focusPolicy: Qt.NoFocus;
             }
         }
     }

@@ -19,10 +19,6 @@ Singleton {
         return player.identity
     }
 
-    // component.onCompleted {
-    //     console.log
-    // }
-
     function getArtUrl(player: MprisPlayer): string {
         if (!player)
             return "";

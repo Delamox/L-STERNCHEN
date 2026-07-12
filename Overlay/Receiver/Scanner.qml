@@ -64,7 +64,6 @@ Item {
         live: false
         width: 86 * Etc.scale
         height: 11 * Etc.scale
-        focusPolicy: Qt.NoFocus;
         onPressedChanged: {
             if (pressed == false) {
                 const active = Players.active;
@@ -96,7 +95,6 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: Players.active?.previous()
-                    focusPolicy: Qt.NoFocus;
                 }
             }
             Arrow {
@@ -106,7 +104,6 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: Players.active?.next()
-                    focusPolicy: Qt.NoFocus;
                 }
             }
             Rectangle {

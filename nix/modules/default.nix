@@ -22,7 +22,6 @@ in
     services = {
       elephant = {
         enable = true;
-        installService = false;
       };
       upower.enable = true;
       playerctld.enable = true;

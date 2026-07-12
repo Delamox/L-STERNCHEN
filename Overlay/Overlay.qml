@@ -26,17 +26,9 @@ PanelWindow {
     }
     Rectangle {
         id: shaderlayer
-        visible: false
+        visible: true
         anchors.fill: parent
         color: Etc.background
-        // Image {
-        //     x: Etc.scale * 20
-        //     y: Etc.scale * 32
-        //     source: "./layout.png"
-        //     height: 320 * Etc.scale
-        //     width: 600 * Etc.scale
-        //     smooth: false
-        // }
         // layer.enabled: false
         layer.enabled: true
         layer.effect: ShaderEffect {
@@ -92,6 +84,14 @@ PanelWindow {
                 x: 370 * Etc.scale
             }
         }
+        // Image {
+        //     x: Etc.scale * 20
+        //     y: Etc.scale * 32
+        //     source: "../rips/layout.png"
+        //     height: 320 * Etc.scale
+        //     width: 600 * Etc.scale
+        //     smooth: false
+        // }
     }
     MouseArea {
         id: cursor
