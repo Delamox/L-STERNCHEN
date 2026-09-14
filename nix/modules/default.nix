@@ -20,9 +20,6 @@ in
     ];
     
     services = {
-      elephant = {
-        enable = true;
-      };
       upower.enable = true;
       playerctld.enable = true;
     };
