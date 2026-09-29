@@ -4,12 +4,9 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    elephant = {
-      url = "github:abenz1267/elephant?rev=bc5200a9fada16cdb226e616aa83068f50cf5ba1";
-    };
   };
 
-  outputs = { self, nixpkgs, ... }: let
+  outputs = inputs@{ self, nixpkgs, ... }: let
     lib = nixpkgs.lib;
     perSystem = package: (lib.listToAttrs (lib.map (a: { name = a; value = package { pkgs = nixpkgs.legacyPackages.${a}; system = a; }; }) (lib.attrNames nixpkgs.legacyPackages)));
     makeQmlPath = pkgs: lib.makeSearchPath "lib/qt-6/qml" (map (path: "${path}") pkgs);
@@ -37,7 +34,21 @@
         dependencies = with pkgs; [
           cava
           quickshell
+          elephant
         ];
+      # in pkgs.writeShellApplication {
+      #   name = "L-STERNCHEN";
+      #   runtimeInputs = dependencies;
+      #   text = ''
+      #     # if ! [ $QS_CONFIG_PATH ]; then
+      #       export QS_CONFIG_PATH=${L-STERNCHEN-config}
+      #     # fi
+      #     # export PATH="${lib.makeBinPath dependencies}:$PATH"
+      #     export QML2_IMPORT_PATH="${qmlPath pkgs}"
+      #     ${pkgs.quickshell}/bin/quickshell
+      #   '';
+      # };
+        
       in pkgs.writeShellScriptBin "L-STERNCHEN" ''
         if ! [ $QS_CONFIG_PATH ]; then
           export QS_CONFIG_PATH=${L-STERNCHEN-config}

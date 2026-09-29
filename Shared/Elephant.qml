@@ -16,7 +16,8 @@ Singleton {
         command: [qsTr("%1/Shared/Elephant.sh").arg(Quickshell.shellDir), root.query]
         stdout: StdioCollector {
             // onStreamFinished: {root.test = this.text}
-            onStreamFinished: {root.search = JSON.parse(this.text)}
+            // onStreamFinished: {root.search = JSON.parse(this.text)}
+            onStreamFinished: {console.log(this.text);root.search = JSON.parse(this.text)}
         }
     }
     Process {
